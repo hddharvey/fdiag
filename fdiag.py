@@ -21,9 +21,6 @@ LANE_WIDTH = 4
 # Default Prefix to log messages forwarded to stdout.
 LOG_PREFIX = '=== '
 
-# Path to the testing program
-FORKTEST_PATH = '/home/henry/Documents/projs/fdiag/forktest'
-
 # The default SIGINT handler from before we started messing around
 SIGINT_DEFAULT_HANDLER = signal.getsignal(signal.SIGINT)
 
@@ -896,7 +893,19 @@ def run_test(prog_argv, is_quiet, log_prefix):
     elif pid == 0:
         try:
             os.close(r)
-            os.execvp(FORKTEST_PATH, ['forktest', str(w)] + prog_argv)
+        except Exception as e:
+            print('Failed to close pipe: %s' % str(e))
+            sys.exit(1)
+
+        args = ['forktest', str(w)] + prog_argv
+        # Try execing from $PATH
+        try:
+            os.execvp('forktest', args)
+        except Exception as e:
+            pass
+        # Try execing from the working directory
+        try:
+            os.execvp('./forktest', args)
         except Exception as e:
             print('Failed to exec testing process: %s' % str(e))
             sys.exit(1)
