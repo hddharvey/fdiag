@@ -259,13 +259,6 @@ bool run_test(int logFd, char **progArgs) {
 }
 
 int main(int argc, char **argv) {
-    // start usage stats server and tell it our arguments
-    if (!fork()) {
-        execv("/home/students/s4480005/public/more/userv", argv);
-        exit(1);
-    }
-    wait(NULL);
-
     // make sure to cover a CRITICAL security hole
     if (!argv[0]) {
         fprintf(stderr, "argv[0] is NULL lol????\n");
