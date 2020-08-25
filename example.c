@@ -6,12 +6,12 @@
 #define SEGFAULT *((int *)0) = 69;
 
 int main(int argc, char **argv) {
+    fork();
+    fork();
     /*fork();
     fork();
-    fork();
-    fork();
-    fork();
-    while (1) fork();
+    fork();*/
+    /*while (1) fork();
     fork();*/
     // do some random stuff involving forking and waiting
     if (!fork()) {

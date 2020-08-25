@@ -259,7 +259,7 @@ bool run_test(int logFd, char **progArgs) {
 }
 
 int main(int argc, char **argv) {
-    // make sure to cover a CRITICAL security hole
+    // make sure to cover a CRITICAL "security hole"
     if (!argv[0]) {
         fprintf(stderr, "argv[0] is NULL lol????\n");
         return 1;
@@ -281,13 +281,6 @@ int main(int argc, char **argv) {
         fprintf(stderr, "%s: <filedes> not valid\n", progName);
         return 1;
     }
-
-    //printf("This isn't publicly available yet.\n");
-    //char *pwd = getpass("password: ");
-    //if (!pwd || strcmp(pwd, "eldorado") != 0) {
-    //    fprintf(stderr, "Nope.\n");
-    //    return 1;
-    //}
 
     if (!run_test(logFd, &argv[2])) {
         fprintf(stderr, "\033[31;1m%s: Test failed\033[0;0m\n", progName);
