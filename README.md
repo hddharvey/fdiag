@@ -1,5 +1,5 @@
 # fdiag
-This is a nifty little script that generates the fork diagram the results from
+This is a nifty little script that generates the fork diagram that results from
 running a certain program or command. Run the python script with no arguments
 to see a description of its arguments and options.
 
