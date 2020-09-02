@@ -1,5 +1,5 @@
 # Library path used by forktest.c when setting LD_PRELOAD
-LIBFORKLOG_PATH=/home/henry/Documents/projs/fdiag/libforklog.so
+LIBFORKLOG_PATH=/tmp/libforklog.so
 
 # Standardized pipe FD used by child processes. I can't think of any other non-
 # invasive ways to communicate with the library embedded into an arbtirary user
@@ -20,6 +20,8 @@ libforklog.so: forklog.c
 	gcc $^ -o $@ -fPIC -shared -ldl \
 	    -DFORKLOG_FD=$(FORKLOG_FD) \
 	    -D_GNU_SOURCE
+	# "Install" the library
+	cp $@ $(LIBFORKLOG_PATH)
 
 forktest: forktest.c
 	gcc $^ -g -o $@ -pthread \
