@@ -29,3 +29,19 @@ It shouldn't work on other Unix-y systems since they won't support Linux's
 PR_SET_CHILD_SUBREAPER option. We also need LD_PRELOAD to work which I hear
 that Mac OS X doesn't support anymore. There's probably other stuff that would
 break on different platforms that I'm not thinking of.
+
+## Other versions
+There's a "newer" version of this at github.com/hddharvey/forktrace that uses 
+C++ and the ptrace system call instead of LD_PRELOAD and a log pipe. Aside from
+that, its scrollable view provides much more detailed information on each node
+of the process tree. It also allows you to step through the process tree kind
+of like gdb (although I'm not sure this feature is really that useful tbh... In
+fact I'm not sure if either of these projects are really that useful apart from
+being a fun visualization tool for students learning about fork() etc. -- which
+was the intended purpose).
+
+The new version is actually quite a big slower than this one, probably due to
+all the context switching and starting and stopping done (the tracer causes the
+tracees to get stopped on every system call). But who cares? There's not really
+much use to running semi-fork-bombs at blazing speed to generate their process
+trees. For any normal process trees the speed difference should be negligible.
